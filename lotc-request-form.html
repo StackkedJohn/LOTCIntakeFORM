@@ -324,16 +324,50 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Can the Caregiver receive text messages? <span style="color: #c22035;">*</span></label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" id="cgTextYes" name="caregiverText" value="yes" required>
-                                <label for="cgTextYes">Yes</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="cgTextNo" name="caregiverText" value="no">
-                                <label for="cgTextNo">No</label>
-                            </div>
+                        <label for="caregiverPhoneType">Phone Type <span style="color: #c22035;">*</span></label>
+                        <select id="caregiverPhoneType" name="caregiverPhoneType" required>
+                            <option value="">Select type...</option>
+                            <option value="mobile">Mobile</option>
+                            <option value="home">Home</option>
+                            <option value="work">Work</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" id="caregiverTextGroup" style="display: none;">
+                    <label>Can the Caregiver receive text messages? <span style="color: #c22035;">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="cgTextYes" name="caregiverText" value="yes">
+                            <label for="cgTextYes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cgTextNo" name="caregiverText" value="no">
+                            <label for="cgTextNo">No</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cgTextNA" name="caregiverText" value="n/a">
+                            <label for="cgTextNA">N/A</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="caregiverAltPhoneGroup" style="display: none;">
+                    <label for="caregiverAltPhone">Alternative Phone Number (Optional)</label>
+                    <div class="grid-2">
+                        <div>
+                            <input type="tel" id="caregiverAltPhone" name="caregiverAltPhone" placeholder="123-456-7890">
+                            <div class="error-message" id="caregiverAltPhoneError">Please use format: 123-456-7890</div>
+                        </div>
+                        <div>
+                            <select id="caregiverAltPhoneType" name="caregiverAltPhoneType">
+                                <option value="">Select type...</option>
+                                <option value="mobile">Mobile</option>
+                                <option value="home">Home</option>
+                                <option value="work">Work</option>
+                                <option value="other">Other</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -388,16 +422,56 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Can the Social Worker receive text messages? <span style="color: #c22035;">*</span></label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" id="swTextYes" name="socialWorkerText" value="yes" required>
-                                <label for="swTextYes">Yes</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="swTextNo" name="socialWorkerText" value="no">
-                                <label for="swTextNo">No</label>
-                            </div>
+                        <label for="socialWorkerPhoneType">Phone Type <span style="color: #c22035;">*</span></label>
+                        <select id="socialWorkerPhoneType" name="socialWorkerPhoneType" required>
+                            <option value="">Select type...</option>
+                            <option value="mobile">Mobile</option>
+                            <option value="office">Office</option>
+                            <option value="direct">Direct Line</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" id="socialWorkerExtensionGroup" style="display: none;">
+                    <label for="socialWorkerExtension">Extension (Optional)</label>
+                    <input type="text" id="socialWorkerExtension" name="socialWorkerExtension" placeholder="e.g., 1234" maxlength="10" style="max-width: 200px;">
+                    <small style="color: #a7a8a3; display: block; margin-top: 5px;">Enter extension number for direct line</small>
+                </div>
+
+                <div class="form-group" id="socialWorkerTextGroup" style="display: none;">
+                    <label>Can the Social Worker receive text messages? <span style="color: #c22035;">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="swTextYes" name="socialWorkerText" value="yes">
+                            <label for="swTextYes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="swTextNo" name="socialWorkerText" value="no">
+                            <label for="swTextNo">No</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="swTextNA" name="socialWorkerText" value="n/a">
+                            <label for="swTextNA">N/A</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="socialWorkerAltPhoneGroup" style="display: none;">
+                    <label for="socialWorkerAltPhone">Alternative Phone Number (Optional)</label>
+                    <div class="grid-2">
+                        <div>
+                            <input type="tel" id="socialWorkerAltPhone" name="socialWorkerAltPhone" placeholder="123-456-7890">
+                            <div class="error-message" id="socialWorkerAltPhoneError">Please use format: 123-456-7890</div>
+                        </div>
+                        <div>
+                            <select id="socialWorkerAltPhoneType" name="socialWorkerAltPhoneType">
+                                <option value="">Select type...</option>
+                                <option value="mobile">Mobile</option>
+                                <option value="office">Office</option>
+                                <option value="direct">Direct Line</option>
+                                <option value="other">Other</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -884,6 +958,15 @@
                 clearError('caregiverPhone', 'caregiverPhoneError');
             }
 
+            // Validate caregiver alternative phone (if provided)
+            const caregiverAltPhone = document.getElementById('caregiverAltPhone');
+            if (caregiverAltPhone.value && !validatePhone(caregiverAltPhone.value)) {
+                showError('caregiverAltPhone', 'caregiverAltPhoneError', 'Please use format: 123-456-7890');
+                isValid = false;
+            } else {
+                clearError('caregiverAltPhone', 'caregiverAltPhoneError');
+            }
+
             // Validate social worker phone
             const socialWorkerPhone = document.getElementById('socialWorkerPhone');
             if (socialWorkerPhone.value && !validatePhone(socialWorkerPhone.value)) {
@@ -891,6 +974,15 @@
                 isValid = false;
             } else {
                 clearError('socialWorkerPhone', 'socialWorkerPhoneError');
+            }
+
+            // Validate social worker alternative phone (if provided)
+            const socialWorkerAltPhone = document.getElementById('socialWorkerAltPhone');
+            if (socialWorkerAltPhone.value && !validatePhone(socialWorkerAltPhone.value)) {
+                showError('socialWorkerAltPhone', 'socialWorkerAltPhoneError', 'Please use format: 123-456-7890');
+                isValid = false;
+            } else {
+                clearError('socialWorkerAltPhone', 'socialWorkerAltPhoneError');
             }
 
             // Validate date of birth
@@ -1009,6 +1101,105 @@
                 this.value = formatPhoneNumber(this.value);
             });
 
+            // Alternative phone number formatting
+            document.getElementById('caregiverAltPhone').addEventListener('blur', function() {
+                if (this.value) {
+                    this.value = formatPhoneNumber(this.value);
+                }
+            });
+
+            document.getElementById('socialWorkerAltPhone').addEventListener('blur', function() {
+                if (this.value) {
+                    this.value = formatPhoneNumber(this.value);
+                }
+            });
+
+            // Caregiver phone type change - show/hide text message and alternative phone options
+            document.getElementById('caregiverPhoneType').addEventListener('change', function() {
+                const phoneType = this.value;
+                const textGroup = document.getElementById('caregiverTextGroup');
+                const altPhoneGroup = document.getElementById('caregiverAltPhoneGroup');
+                const textInputs = textGroup.querySelectorAll('input[type="radio"]');
+
+                if (phoneType === 'mobile') {
+                    // Show text message question for mobile
+                    textGroup.style.display = 'block';
+                    textInputs.forEach(input => input.required = true);
+                    // Show alternative phone option
+                    altPhoneGroup.style.display = 'block';
+                } else if (phoneType === 'home' || phoneType === 'work' || phoneType === 'other') {
+                    // Hide text message question and auto-select N/A
+                    textGroup.style.display = 'none';
+                    textInputs.forEach(input => {
+                        input.required = false;
+                        input.checked = false;
+                    });
+                    document.getElementById('cgTextNA').checked = true;
+                    // Show alternative phone option
+                    altPhoneGroup.style.display = 'block';
+                } else {
+                    // No phone type selected
+                    textGroup.style.display = 'none';
+                    altPhoneGroup.style.display = 'none';
+                    textInputs.forEach(input => {
+                        input.required = false;
+                        input.checked = false;
+                    });
+                }
+            });
+
+            // Social worker phone type change
+            document.getElementById('socialWorkerPhoneType').addEventListener('change', function() {
+                const phoneType = this.value;
+                const textGroup = document.getElementById('socialWorkerTextGroup');
+                const altPhoneGroup = document.getElementById('socialWorkerAltPhoneGroup');
+                const extensionGroup = document.getElementById('socialWorkerExtensionGroup');
+                const textInputs = textGroup.querySelectorAll('input[type="radio"]');
+
+                if (phoneType === 'mobile') {
+                    // Show text message question for mobile
+                    textGroup.style.display = 'block';
+                    textInputs.forEach(input => input.required = true);
+                    // Show alternative phone option
+                    altPhoneGroup.style.display = 'block';
+                    // Hide extension field
+                    extensionGroup.style.display = 'none';
+                } else if (phoneType === 'direct') {
+                    // Hide text message question and auto-select N/A
+                    textGroup.style.display = 'none';
+                    textInputs.forEach(input => {
+                        input.required = false;
+                        input.checked = false;
+                    });
+                    document.getElementById('swTextNA').checked = true;
+                    // Show alternative phone option
+                    altPhoneGroup.style.display = 'block';
+                    // Show extension field for direct line
+                    extensionGroup.style.display = 'block';
+                } else if (phoneType === 'office' || phoneType === 'other') {
+                    // Hide text message question and auto-select N/A
+                    textGroup.style.display = 'none';
+                    textInputs.forEach(input => {
+                        input.required = false;
+                        input.checked = false;
+                    });
+                    document.getElementById('swTextNA').checked = true;
+                    // Show alternative phone option
+                    altPhoneGroup.style.display = 'block';
+                    // Hide extension field
+                    extensionGroup.style.display = 'none';
+                } else {
+                    // No phone type selected
+                    textGroup.style.display = 'none';
+                    altPhoneGroup.style.display = 'none';
+                    extensionGroup.style.display = 'none';
+                    textInputs.forEach(input => {
+                        input.required = false;
+                        input.checked = false;
+                    });
+                }
+            });
+
             // Email validation on blur
             document.getElementById('caregiverEmail').addEventListener('blur', function() {
                 if (this.value && !validateEmail(this.value)) {
@@ -1078,9 +1269,18 @@
                 'Caregiver Name',
                 'Caregiver Email',
                 'Caregiver Phone',
+                'Caregiver Phone Type',
+                'Caregiver Can Text',
+                'Caregiver Alt Phone',
+                'Caregiver Alt Phone Type',
                 'Social Worker Name',
                 'Social Worker Email',
                 'Social Worker Phone',
+                'Social Worker Phone Type',
+                'Social Worker Extension',
+                'Social Worker Can Text',
+                'Social Worker Alt Phone',
+                'Social Worker Alt Phone Type',
                 'Placement Type',
                 'Custody County',
                 'Completion Contact',
@@ -1104,9 +1304,18 @@
                     `"${sub.caregiverName || ''}"`,
                     sub.caregiverEmail || '',
                     sub.caregiverPhone || '',
+                    sub.caregiverPhoneType || '',
+                    sub.caregiverText || '',
+                    sub.caregiverAltPhone || '',
+                    sub.caregiverAltPhoneType || '',
                     `"${sub.socialWorkerName || ''}"`,
                     sub.socialWorkerEmail || '',
                     sub.socialWorkerPhone || '',
+                    sub.socialWorkerPhoneType || '',
+                    sub.socialWorkerExtension || '',
+                    sub.socialWorkerText || '',
+                    sub.socialWorkerAltPhone || '',
+                    sub.socialWorkerAltPhoneType || '',
                     sub.placementType || '',
                     sub.custodyCounty || '',
                     sub.completionContact || '',
