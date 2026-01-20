@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "lotc-request-form",
+  "builds": [
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/lotc-request-form.html"
+    }
+  ]
+}

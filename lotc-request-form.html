@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOTC Request Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #86b2d3;
+            color: #060511;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
+
+        h1 {
+            color: #c22035;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            color: #a7a8a3;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #c22035;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #c22035;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #060511;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #86b2d3;
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #c22035;
+            box-shadow: 0 0 0 3px rgba(194, 32, 53, 0.1);
+        }
+
+        input[readonly],
+        input[disabled] {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+            color: #666;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #c22035;
+        }
+
+        .button {
+            background-color: #c22035;
+            color: #ffffff;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .button:hover {
+            background-color: #a01828;
+            transform: translateY(-1px);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+        }
+
+        .note {
+            background-color: #86b2d3;
+            padding: 15px;
+            border-radius: 4px;
+            color: #060511;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .info-box {
+            background-color: #f0f8ff;
+            border-left: 4px solid #86b2d3;
+            padding: 12px 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #060511;
+        }
+
+        .value-display {
+            background-color: #f0f8ff;
+            border: 2px solid #86b2d3;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .value-display .amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #c22035;
+            margin-bottom: 5px;
+        }
+
+        .value-display .category {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .error-message {
+            color: #c22035;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        input.error,
+        select.error,
+        textarea.error {
+            border-color: #c22035;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .conditional-section {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <svg class="logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="95" fill="#c22035"/>
+                <circle cx="100" cy="100" r="85" fill="#c22035" stroke="#ffffff" stroke-width="2"/>
+                <text x="100" y="50" text-anchor="middle" fill="#ffffff" font-family="Poppins" font-size="12" font-weight="400">LEAST OF THESE</text>
+                <text x="100" y="155" text-anchor="middle" fill="#ffffff" font-family="Poppins" font-size="12" font-weight="400">CAROLINAS</text>
+            </svg>
+            <h1>Request Form</h1>
+            <p class="tagline">impacting the lives of children affected by foster and kinship care</p>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <strong>Success!</strong> Your request has been submitted successfully. Thank you for supporting Least of These Carolinas.
+        </div>
+
+        <form id="requestForm">
+            <!-- Form Completed By Section -->
+            <div class="section">
+                <h2 class="section-title">Form Completed By</h2>
+                <div class="form-group">
+                    <label for="completedBy">Name <span style="color: #c22035;">*</span></label>
+                    <input type="text" id="completedBy" name="completedBy" required>
+                </div>
+                <div class="form-group">
+                    <label for="completedByRole">Your Role/Relationship <span style="color: #c22035;">*</span></label>
+                    <select id="completedByRole" name="completedByRole" required>
+                        <option value="">Select your role...</option>
+                        <option value="caregiver">I am the Caregiver</option>
+                        <option value="social-worker">I am the Social Worker</option>
+                        <option value="other">Other (Family Member, Advocate, etc.)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Caregiver Details Section -->
+            <div class="section">
+                <h2 class="section-title">Caregiver Details</h2>
+
+                <div class="form-group">
+                    <label for="caregiverName">Caregiver's Name <span style="color: #c22035;">*</span></label>
+                    <input type="text" id="caregiverName" name="caregiverName" required>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="caregiverPhone">Caregiver's Phone Number <span style="color: #c22035;">*</span></label>
+                        <input type="tel" id="caregiverPhone" name="caregiverPhone" placeholder="123-456-7890" required>
+                        <div class="error-message" id="caregiverPhoneError">Please use format: 123-456-7890</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Can the Caregiver receive text messages? <span style="color: #c22035;">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="cgTextYes" name="caregiverText" value="yes" required>
+                                <label for="cgTextYes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="cgTextNo" name="caregiverText" value="no">
+                                <label for="cgTextNo">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="caregiverEmail">Caregiver's Email Address <span style="color: #c22035;">*</span></label>
+                    <input type="email" id="caregiverEmail" name="caregiverEmail" required>
+                    <div class="error-message" id="caregiverEmailError">Please enter a valid email address</div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="caregiverCounty">Caregiver's County of Residence <span style="color: #c22035;">*</span></label>
+                        <input type="text" id="caregiverCounty" name="caregiverCounty" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Is the caregiver a licensed foster parent? <span style="color: #c22035;">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="licensedYes" name="licensed" value="yes" required>
+                                <label for="licensedYes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="licensedNo" name="licensed" value="no">
+                                <label for="licensedNo">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="relationshipToChild">Relationship to the Child</label>
+                    <input type="text" id="relationshipToChild" name="relationshipToChild" placeholder="e.g., Aunt, Grandmother, Foster Parent">
+                </div>
+            </div>
+
+            <!-- Social Worker Details Section -->
+            <div class="section">
+                <h2 class="section-title">Social Worker Details</h2>
+
+                <div class="form-group">
+                    <label for="socialWorkerName">DSS Social Worker's Name <span style="color: #c22035;">*</span></label>
+                    <input type="text" id="socialWorkerName" name="socialWorkerName" required>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="socialWorkerPhone">Social Worker's Phone Number <span style="color: #c22035;">*</span></label>
+                        <input type="tel" id="socialWorkerPhone" name="socialWorkerPhone" placeholder="123-456-7890" required>
+                        <div class="error-message" id="socialWorkerPhoneError">Please use format: 123-456-7890</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Can the Social Worker receive text messages? <span style="color: #c22035;">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="swTextYes" name="socialWorkerText" value="yes" required>
+                                <label for="swTextYes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="swTextNo" name="socialWorkerText" value="no">
+                                <label for="swTextNo">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="socialWorkerEmail">Social Worker's Email <span style="color: #c22035;">*</span></label>
+                    <input type="email" id="socialWorkerEmail" name="socialWorkerEmail" required>
+                    <div class="error-message" id="socialWorkerEmailError">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="socialWorkerCounty">Social Worker County of Employment <span style="color: #c22035;">*</span></label>
+                    <input type="text" id="socialWorkerCounty" name="socialWorkerCounty" required>
+                </div>
+            </div>
+
+            <!-- Child Details Section -->
+            <div class="section">
+                <h2 class="section-title">Child Details</h2>
+
+                <div class="form-group">
+                    <label for="requestType">Request Type <span style="color: #c22035;">*</span></label>
+                    <select id="requestType" name="requestType" required>
+                        <option value="">Select request type...</option>
+                        <option value="bags-of-hope">Bags of Hope</option>
+                        <option value="birthday">Birthday</option>
+                        <option value="general">General</option>
+                        <option value="just-like-you">Just Like You</option>
+                        <option value="life-box">Life Box</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="completionContact">Completion Contact - Who should we contact when the request is ready? <span style="color: #c22035;">*</span></label>
+                    <select id="completionContact" name="completionContact" required>
+                        <option value="">Select contact...</option>
+                        <option value="caregiver">Caregiver</option>
+                        <option value="social-worker">Social Worker</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pickupLocation">Pick Up Location <span style="color: #c22035;">*</span></label>
+                    <select id="pickupLocation" name="pickupLocation" required>
+                        <option value="">Select location...</option>
+                        <option value="gastonia">LOTC Office - S. Myrtle School Rd, Gastonia</option>
+                    </select>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="childFirstName">Child's First Name <span style="color: #c22035;">*</span></label>
+                        <input type="text" id="childFirstName" name="childFirstName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="childLastName">Child's Last Name <span style="color: #c22035;">*</span></label>
+                        <input type="text" id="childLastName" name="childLastName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="childNickname">Child's Nickname (optional)</label>
+                    <input type="text" id="childNickname" name="childNickname">
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="childGender">Child's Gender <span style="color: #c22035;">*</span></label>
+                        <select id="childGender" name="childGender" required>
+                            <option value="">Select gender...</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="childDOB">Child's Date of Birth <span style="color: #c22035;">*</span></label>
+                        <input type="date" id="childDOB" name="childDOB" required>
+                        <div class="error-message" id="childDOBError">Date of birth cannot be in the future</div>
+                    </div>
+                </div>
+
+                <!-- Auto-calculated Age Display -->
+                <div class="form-group" id="ageDisplayGroup" style="display: none;">
+                    <label>Child's Age (Auto-calculated)</label>
+                    <div class="info-box">
+                        <strong id="ageDisplay"></strong> - <span id="ageCategoryDisplay"></span>
+                    </div>
+                </div>
+
+                <!-- Auto-calculated Estimated Value Display (BOH only) -->
+                <div class="form-group" id="estimatedValueGroup" style="display: none;">
+                    <label>Estimated Value (Auto-calculated)</label>
+                    <div class="value-display">
+                        <div class="amount" id="estimatedValueDisplay">$0</div>
+                        <div class="category" id="valueCategoryDisplay"></div>
+                    </div>
+                    <input type="hidden" id="estimatedValue" name="estimatedValue">
+                </div>
+
+                <div class="form-group">
+                    <label for="childEthnicity">Child's Ethnicity</label>
+                    <input type="text" id="childEthnicity" name="childEthnicity">
+                </div>
+
+                <div class="form-group">
+                    <label for="placementType">Child's Placement Type <span style="color: #c22035;">*</span></label>
+                    <select id="placementType" name="placementType" required>
+                        <option value="">Select placement type...</option>
+                        <option value="foster-family">Foster - Family Home</option>
+                        <option value="foster-group">Foster - Group Home placement</option>
+                        <option value="kinship">Kinship Care</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="custodyCounty">County that has Custody of child <span style="color: #c22035;">*</span></label>
+                    <input type="text" id="custodyCounty" name="custodyCounty" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="siblingsNames">Child's Siblings Names (first name and last initial only)</label>
+                    <input type="text" id="siblingsNames" name="siblingsNames" placeholder="e.g., John D., Mary D.">
+                </div>
+
+                <div class="form-group">
+                    <label>Are child's siblings in the same home as this child?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="siblingsYes" name="siblingsSameHome" value="yes">
+                            <label for="siblingsYes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="siblingsNo" name="siblingsSameHome" value="no">
+                            <label for="siblingsNo">No</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="siblingsNA" name="siblingsSameHome" value="na">
+                            <label for="siblingsNA">N/A</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Child's Clothing Sizes Section (Conditional) -->
+            <div class="section conditional-section" id="clothingSizesSection">
+                <h2 class="section-title">Child's Clothing Sizes</h2>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="shirtSize">Child's Shirt Size</label>
+                        <input type="text" id="shirtSize" name="shirtSize">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pantSize">Child's Pant Size</label>
+                        <input type="text" id="pantSize" name="pantSize">
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="shoeSize">Child's Sock/Shoe Size</label>
+                        <input type="text" id="shoeSize" name="shoeSize">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="undergarmentSize">Child's Undergarments Size</label>
+                        <input type="text" id="undergarmentSize" name="undergarmentSize">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="diaperSize">Child's Diaper Size (if applicable)</label>
+                    <input type="text" id="diaperSize" name="diaperSize">
+                </div>
+            </div>
+
+            <!-- Additional Information Section -->
+            <div class="section">
+                <h2 class="section-title">Additional Information</h2>
+
+                <div class="form-group">
+                    <label for="favoriteColor">Favorite Color</label>
+                    <input type="text" id="favoriteColor" name="favoriteColor">
+                </div>
+
+                <div class="form-group">
+                    <label for="interests">Interests</label>
+                    <textarea id="interests" name="interests" placeholder="e.g., Black Panther, Squishmallow, Legos, Magnetic blocks, Cats, Wolverine, Toro"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="needs">Needs</label>
+                    <textarea id="needs" name="needs" placeholder="e.g., Dove Bodywash, Lotion(Eucerin), Deodorant, Hair Brush, Toothpaste, Toothbrush, Pomade, Clothes(pajamas, shirts, sweatpants, socks, underwear), throw blanket"></textarea>
+                </div>
+            </div>
+
+            <!-- Privacy Agreement -->
+            <div class="section">
+                <div class="form-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="privacyAgreement" name="privacyAgreement" required>
+                        <label for="privacyAgreement">By submitting this request, I agree to receive text messages and/or emails from Least of These Carolinas. To view our Privacy Policy, visit our website: https://lotcarolinas.com/privacy-policy <span style="color: #c22035;">*</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="button-container">
+                <button type="submit" class="button">Submit Request</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // ==========================================
+        // CONFIGURATION
+        // ==========================================
+        const PRICING_CONFIG = {
+            'bags-of-hope': {
+                ageRanges: [
+                    { min: 1, max: 2, value: 250, label: 'Baby (1-2 years)' },
+                    { min: 3, max: 5, value: 250, label: 'Toddler (3-5 years)' },
+                    { min: 6, max: 11, value: 250, label: 'Child (6-11 years)' },
+                    { min: 12, max: 18, value: 300, label: 'Teen (12+ years)' }
+                ]
+            }
+        };
+
+        const FIELD_VISIBILITY_RULES = {
+            'bags-of-hope': {
+                showSections: ['clothingSizesSection'],
+                hideSections: [],
+                showEstimatedValue: true
+            },
+            'birthday': {
+                showSections: [],
+                hideSections: ['clothingSizesSection'],
+                showEstimatedValue: false
+            },
+            'general': {
+                showSections: [],
+                hideSections: ['clothingSizesSection'],
+                showEstimatedValue: false
+            },
+            'just-like-you': {
+                showSections: [],
+                hideSections: ['clothingSizesSection'],
+                showEstimatedValue: false
+            },
+            'life-box': {
+                showSections: ['clothingSizesSection'],
+                hideSections: [],
+                showEstimatedValue: false
+            }
+        };
+
+        // ==========================================
+        // UTILITY FUNCTIONS
+        // ==========================================
+        function calculateAge(dateOfBirth) {
+            const dob = new Date(dateOfBirth);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDiff = today.getMonth() - dob.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+
+            return age;
+        }
+
+        function formatPhoneNumber(phoneNumber) {
+            // Remove all non-digit characters
+            const cleaned = phoneNumber.replace(/\D/g, '');
+
+            // Format as XXX-XXX-XXXX
+            if (cleaned.length === 10) {
+                return cleaned.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+            }
+
+            return phoneNumber;
+        }
+
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function validatePhone(phone) {
+            const phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
+            return phoneRegex.test(phone);
+        }
+
+        function showError(fieldId, errorId, message) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(errorId);
+
+            if (field) field.classList.add('error');
+            if (error) {
+                error.textContent = message;
+                error.classList.add('show');
+            }
+        }
+
+        function clearError(fieldId, errorId) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(errorId);
+
+            if (field) field.classList.remove('error');
+            if (error) error.classList.remove('show');
+        }
+
+        // ==========================================
+        // AGE CALCULATION AND DISPLAY
+        // ==========================================
+        function updateAgeDisplay() {
+            const dobInput = document.getElementById('childDOB');
+            const ageDisplayGroup = document.getElementById('ageDisplayGroup');
+            const ageDisplay = document.getElementById('ageDisplay');
+            const ageCategoryDisplay = document.getElementById('ageCategoryDisplay');
+
+            if (!dobInput.value) {
+                ageDisplayGroup.style.display = 'none';
+                return;
+            }
+
+            // Validate DOB is not in the future
+            const dob = new Date(dobInput.value);
+            const today = new Date();
+
+            if (dob >= today) {
+                showError('childDOB', 'childDOBError', 'Date of birth cannot be in the future');
+                ageDisplayGroup.style.display = 'none';
+                return;
+            }
+
+            clearError('childDOB', 'childDOBError');
+
+            const age = calculateAge(dobInput.value);
+
+            // Determine age category
+            let category = '';
+            if (age < 1) {
+                category = 'Infant (under 1 year)';
+            } else if (age >= 1 && age <= 2) {
+                category = 'Baby (1-2 years)';
+            } else if (age >= 3 && age <= 5) {
+                category = 'Toddler (3-5 years)';
+            } else if (age >= 6 && age <= 11) {
+                category = 'Child (6-11 years)';
+            } else if (age >= 12) {
+                category = 'Teen (12+ years)';
+            }
+
+            // Display age
+            ageDisplay.textContent = age === 1 ? '1 year old' : `${age} years old`;
+            ageCategoryDisplay.textContent = category;
+            ageDisplayGroup.style.display = 'block';
+
+            // Trigger estimated value calculation
+            calculateEstimatedValue();
+        }
+
+        // ==========================================
+        // ESTIMATED VALUE CALCULATION (BOH ONLY)
+        // ==========================================
+        function calculateEstimatedValue() {
+            const requestType = document.getElementById('requestType').value;
+            const dobInput = document.getElementById('childDOB').value;
+            const estimatedValueGroup = document.getElementById('estimatedValueGroup');
+            const estimatedValueDisplay = document.getElementById('estimatedValueDisplay');
+            const valueCategoryDisplay = document.getElementById('valueCategoryDisplay');
+            const estimatedValueInput = document.getElementById('estimatedValue');
+
+            // Only show estimated value for Bags of Hope
+            if (requestType !== 'bags-of-hope') {
+                estimatedValueGroup.style.display = 'none';
+                estimatedValueInput.value = '';
+                return;
+            }
+
+            if (!dobInput) {
+                estimatedValueGroup.style.display = 'none';
+                return;
+            }
+
+            const age = calculateAge(dobInput);
+            const config = PRICING_CONFIG['bags-of-hope'];
+
+            // Find matching age range
+            const ageRange = config.ageRanges.find(
+                range => age >= range.min && age <= range.max
+            );
+
+            if (ageRange) {
+                estimatedValueDisplay.textContent = `$${ageRange.value}`;
+                valueCategoryDisplay.textContent = `Based on ${ageRange.label} category`;
+                estimatedValueInput.value = ageRange.value;
+                estimatedValueGroup.style.display = 'block';
+            } else {
+                // Age outside defined ranges (e.g., under 1 or over 18)
+                estimatedValueDisplay.textContent = 'N/A';
+                valueCategoryDisplay.textContent = 'Age outside standard range - manual review required';
+                estimatedValueInput.value = '0';
+                estimatedValueGroup.style.display = 'block';
+            }
+        }
+
+        // ==========================================
+        // SMART FIELD VISIBILITY
+        // ==========================================
+        function updateFieldVisibility() {
+            const requestType = document.getElementById('requestType').value;
+
+            if (!requestType) {
+                // Hide all conditional sections if no request type selected
+                document.querySelectorAll('.conditional-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                return;
+            }
+
+            const rules = FIELD_VISIBILITY_RULES[requestType];
+            if (!rules) return;
+
+            // Show sections based on rules
+            rules.showSections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.style.display = 'block';
+                }
+            });
+
+            // Hide sections based on rules
+            rules.hideSections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.style.display = 'none';
+                }
+            });
+
+            // Show/hide estimated value based on request type
+            if (rules.showEstimatedValue) {
+                calculateEstimatedValue();
+            } else {
+                document.getElementById('estimatedValueGroup').style.display = 'none';
+            }
+        }
+
+        // ==========================================
+        // FORM VALIDATION
+        // ==========================================
+        function validateForm() {
+            let isValid = true;
+
+            // Validate caregiver email
+            const caregiverEmail = document.getElementById('caregiverEmail');
+            if (caregiverEmail.value && !validateEmail(caregiverEmail.value)) {
+                showError('caregiverEmail', 'caregiverEmailError', 'Please enter a valid email address');
+                isValid = false;
+            } else {
+                clearError('caregiverEmail', 'caregiverEmailError');
+            }
+
+            // Validate social worker email
+            const socialWorkerEmail = document.getElementById('socialWorkerEmail');
+            if (socialWorkerEmail.value && !validateEmail(socialWorkerEmail.value)) {
+                showError('socialWorkerEmail', 'socialWorkerEmailError', 'Please enter a valid email address');
+                isValid = false;
+            } else {
+                clearError('socialWorkerEmail', 'socialWorkerEmailError');
+            }
+
+            // Validate caregiver phone
+            const caregiverPhone = document.getElementById('caregiverPhone');
+            if (caregiverPhone.value && !validatePhone(caregiverPhone.value)) {
+                showError('caregiverPhone', 'caregiverPhoneError', 'Please use format: 123-456-7890');
+                isValid = false;
+            } else {
+                clearError('caregiverPhone', 'caregiverPhoneError');
+            }
+
+            // Validate social worker phone
+            const socialWorkerPhone = document.getElementById('socialWorkerPhone');
+            if (socialWorkerPhone.value && !validatePhone(socialWorkerPhone.value)) {
+                showError('socialWorkerPhone', 'socialWorkerPhoneError', 'Please use format: 123-456-7890');
+                isValid = false;
+            } else {
+                clearError('socialWorkerPhone', 'socialWorkerPhoneError');
+            }
+
+            // Validate date of birth
+            const childDOB = document.getElementById('childDOB');
+            if (childDOB.value) {
+                const dob = new Date(childDOB.value);
+                const today = new Date();
+
+                if (dob >= today) {
+                    showError('childDOB', 'childDOBError', 'Date of birth cannot be in the future');
+                    isValid = false;
+                } else {
+                    clearError('childDOB', 'childDOBError');
+                }
+            }
+
+            return isValid;
+        }
+
+        // ==========================================
+        // FORM SUBMISSION
+        // ==========================================
+        function handleFormSubmit(e) {
+            e.preventDefault();
+
+            // Validate form
+            if (!validateForm()) {
+                alert('Please correct the errors in the form before submitting.');
+                return;
+            }
+
+            // Collect form data
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            // Add calculated fields
+            const dobInput = document.getElementById('childDOB');
+            if (dobInput.value) {
+                data.childAge = calculateAge(dobInput.value);
+            }
+
+            // Add timestamp
+            data.submittedAt = new Date().toISOString();
+            data.requestDate = new Date().toISOString().split('T')[0];
+
+            // Log to console (in production, this would send to a server)
+            console.log('Form submitted with data:', data);
+
+            // Save to localStorage
+            saveToLocalStorage(data);
+
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Reset form after a delay
+            setTimeout(() => {
+                e.target.reset();
+                successMessage.classList.remove('show');
+
+                // Hide conditional sections
+                document.getElementById('ageDisplayGroup').style.display = 'none';
+                document.getElementById('estimatedValueGroup').style.display = 'none';
+                document.getElementById('clothingSizesSection').style.display = 'none';
+            }, 3000);
+        }
+
+        function saveToLocalStorage(data) {
+            try {
+                // Get existing submissions
+                const submissions = JSON.parse(localStorage.getItem('lotcSubmissions') || '[]');
+
+                // Add new submission with unique ID
+                const submission = {
+                    ...data,
+                    localId: `local-${Date.now()}`,
+                    syncStatus: 'pending'
+                };
+
+                submissions.push(submission);
+
+                // Save back to localStorage
+                localStorage.setItem('lotcSubmissions', JSON.stringify(submissions));
+
+                console.log('Submission saved to localStorage:', submission);
+            } catch (error) {
+                console.error('Error saving to localStorage:', error);
+            }
+        }
+
+        // ==========================================
+        // EVENT LISTENERS
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission
+            document.getElementById('requestForm').addEventListener('submit', handleFormSubmit);
+
+            // Date of birth change - triggers age and value calculation
+            document.getElementById('childDOB').addEventListener('change', updateAgeDisplay);
+
+            // Request type change - triggers field visibility and value calculation
+            document.getElementById('requestType').addEventListener('change', function() {
+                updateFieldVisibility();
+                calculateEstimatedValue();
+            });
+
+            // Phone number formatting
+            document.getElementById('caregiverPhone').addEventListener('blur', function() {
+                this.value = formatPhoneNumber(this.value);
+            });
+
+            document.getElementById('socialWorkerPhone').addEventListener('blur', function() {
+                this.value = formatPhoneNumber(this.value);
+            });
+
+            // Email validation on blur
+            document.getElementById('caregiverEmail').addEventListener('blur', function() {
+                if (this.value && !validateEmail(this.value)) {
+                    showError('caregiverEmail', 'caregiverEmailError', 'Please enter a valid email address');
+                } else {
+                    clearError('caregiverEmail', 'caregiverEmailError');
+                }
+            });
+
+            document.getElementById('socialWorkerEmail').addEventListener('blur', function() {
+                if (this.value && !validateEmail(this.value)) {
+                    showError('socialWorkerEmail', 'socialWorkerEmailError', 'Please enter a valid email address');
+                } else {
+                    clearError('socialWorkerEmail', 'socialWorkerEmailError');
+                }
+            });
+
+            // Initialize: hide conditional sections
+            updateFieldVisibility();
+        });
+
+        // ==========================================
+        // ADMIN PANEL (Hidden - Press Ctrl+Alt+A)
+        // ==========================================
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.altKey && e.key === 'a') {
+                showAdminPanel();
+            }
+        });
+
+        function showAdminPanel() {
+            const submissions = JSON.parse(localStorage.getItem('lotcSubmissions') || '[]');
+
+            if (submissions.length === 0) {
+                alert('No pending submissions found.');
+                return;
+            }
+
+            const message = `Found ${submissions.length} pending submission(s).\n\nOptions:\n1. Export to CSV\n2. View in Console\n3. Clear All`;
+            const choice = prompt(message, '1');
+
+            if (choice === '1') {
+                exportToCSV(submissions);
+            } else if (choice === '2') {
+                console.table(submissions);
+                alert('Submissions logged to console. Press F12 to view.');
+            } else if (choice === '3') {
+                if (confirm('Are you sure you want to clear all submissions?')) {
+                    localStorage.removeItem('lotcSubmissions');
+                    alert('All submissions cleared.');
+                }
+            }
+        }
+
+        function exportToCSV(submissions) {
+            // Define CSV headers
+            const headers = [
+                'Local ID',
+                'Request Date',
+                'Request Type',
+                'Child First Name',
+                'Child Last Name',
+                'Child Age',
+                'Child Gender',
+                'Child DOB',
+                'Estimated Value',
+                'Caregiver Name',
+                'Caregiver Email',
+                'Caregiver Phone',
+                'Social Worker Name',
+                'Social Worker Email',
+                'Social Worker Phone',
+                'Placement Type',
+                'Custody County',
+                'Completion Contact',
+                'Pickup Location'
+            ];
+
+            // Build CSV content
+            let csv = headers.join(',') + '\n';
+
+            submissions.forEach(sub => {
+                const row = [
+                    sub.localId || '',
+                    sub.requestDate || '',
+                    sub.requestType || '',
+                    sub.childFirstName || '',
+                    sub.childLastName || '',
+                    sub.childAge || '',
+                    sub.childGender || '',
+                    sub.childDOB || '',
+                    sub.estimatedValue || '',
+                    `"${sub.caregiverName || ''}"`,
+                    sub.caregiverEmail || '',
+                    sub.caregiverPhone || '',
+                    `"${sub.socialWorkerName || ''}"`,
+                    sub.socialWorkerEmail || '',
+                    sub.socialWorkerPhone || '',
+                    sub.placementType || '',
+                    sub.custodyCounty || '',
+                    sub.completionContact || '',
+                    sub.pickupLocation || ''
+                ];
+
+                csv += row.join(',') + '\n';
+            });
+
+            // Create download link
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `lotc-submissions-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            alert('CSV file downloaded successfully!');
+        }
+    </script>
+</body>
+</html>
