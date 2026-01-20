@@ -32,9 +32,19 @@ vercel --prod
 - **Birthday**: Hides clothing sizes, no estimated value
 - **Other Types**: Conditional sections based on request type
 
+### Intelligent Phone Number System
+- **Phone Type Selection**: Context-aware dropdowns for caregiver and social worker
+  - Caregiver: Mobile, Home, Work, Other
+  - Social Worker: Mobile, Office, Direct Line, Other
+- **Conditional Text Messaging**: Text message option appears only for mobile phones
+- **Extension Field**: Appears automatically when Direct Line is selected
+- **Alternative Phone Numbers**: Optional secondary phone with type selection
+- **Smart Validation**: All phone fields validated and auto-formatted
+
 ### Form Validation
 - Real-time email validation
 - Auto-format phone numbers (XXX-XXX-XXXX)
+- Phone type-based conditional fields
 - Date validation (prevents future dates)
 - Clear error messages
 
@@ -96,8 +106,15 @@ Form submissions are saved with the following structure:
   "completedByRole": "caregiver",
   "caregiverName": "Jane Smith",
   "caregiverPhone": "336-123-4567",
+  "caregiverPhoneType": "mobile",
+  "caregiverText": "yes",
+  "caregiverAltPhone": "336-555-1234",
+  "caregiverAltPhoneType": "home",
   "caregiverEmail": "jane@example.com",
   "socialWorkerName": "Mary Johnson",
+  "socialWorkerPhone": "336-987-6543",
+  "socialWorkerPhoneType": "direct",
+  "socialWorkerExtension": "1234",
   "requestType": "bags-of-hope",
   "childFirstName": "Emma",
   "childLastName": "Smith",

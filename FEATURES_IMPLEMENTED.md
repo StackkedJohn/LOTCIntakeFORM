@@ -35,21 +35,46 @@
 - **Life Box:** Shows clothing sizes section only
 - **Animation:** Smooth fade-in when sections appear
 
-### 4. Enhanced Form Validation ✅
+### 4. Intelligent Phone Number System ✅
+- **Phone Type Selection:** Context-aware dropdown for both caregiver and social worker
+  - **Caregiver Options:** Mobile, Home, Work, Other
+  - **Social Worker Options:** Mobile, Office, Direct Line, Other
+- **Conditional Text Messaging:**
+  - Shows "Can receive text messages?" only when Mobile is selected
+  - Auto-selects "N/A" for non-mobile phone types
+  - Options: Yes, No, N/A
+- **Extension Field for Direct Lines:**
+  - Appears only when "Direct Line" is selected for social worker
+  - Optional field with 10 character limit
+  - Helpful placeholder: "e.g., 1234"
+- **Alternative Phone Numbers:**
+  - Optional secondary phone for both caregiver and social worker
+  - Includes separate phone type selector
+  - Full validation and formatting support
+- **Smart Field Visibility:**
+  - Text message question appears/disappears based on phone type
+  - Extension field shows only for direct lines
+  - Alternative phone field appears after primary phone type selection
+- **Auto-Formatting:** All phone numbers format to XXX-XXX-XXXX on blur
+
+### 5. Enhanced Form Validation ✅
 - **Email Validation:** Real-time validation for caregiver and social worker emails
 - **Phone Formatting:** Auto-formats phone numbers to XXX-XXX-XXXX format
-- **Phone Validation:** Ensures correct phone format
+- **Phone Validation:** Ensures correct phone format for all phone fields (primary and alternative)
 - **Date Validation:** Prevents future dates for child's DOB
 - **Error Messages:** Clear, red error messages appear below invalid fields
 - **Visual Feedback:** Fields with errors get red border
 
-### 5. New Fields Added ✅
+### 6. New Fields Added ✅
 - **Form Completed By Role:** Dropdown to select relationship (Caregiver, Social Worker, Other)
+- **Phone Type Fields:** Dropdown for phone type selection (caregiver and social worker)
+- **Alternative Phone Fields:** Optional secondary phone numbers with type selection
+- **Extension Field:** Extension number for direct line phone types
 - **Age Display:** Shows calculated age and category
 - **Estimated Value Display:** Shows calculated value for BOH requests
 - **Sibling Same Home:** Added "N/A" option to existing Yes/No
 
-### 6. UI/UX Improvements ✅
+### 7. UI/UX Improvements ✅
 - **Typography:**
   - Main headline uses "Bebas Neue" font (close alternative to Oakside)
   - All other text follows brand guidelines (Poppins)
@@ -61,7 +86,7 @@
 - **Better Spacing:** More breathing room between sections
 - **Info Boxes:** Blue bordered boxes for calculated information
 
-### 7. Local Storage & Data Export ✅
+### 8. Local Storage & Data Export ✅
 - **Auto-Save:** All form submissions saved to browser localStorage
 - **Pending Queue:** Submissions tagged as "pending" until synced to Neon CRM
 - **Admin Panel:** Hidden admin panel (Press Ctrl+Alt+A)
@@ -69,9 +94,9 @@
   - Export all submissions to CSV
   - View submissions in browser console
   - Clear all submissions
-- **CSV Export:** Includes all key fields for manual import
+- **CSV Export:** Includes all key fields including new phone data (phone types, extensions, alternative phones)
 
-### 8. Form Submission Enhancement ✅
+### 9. Form Submission Enhancement ✅
 - **Success Message:** Green success banner appears at top after submission
 - **Auto-Reset:** Form clears after 3 seconds
 - **Smooth Scroll:** Scrolls to top to show success message
@@ -135,6 +160,34 @@
    - **Expected:** Age displays "0 years old - Infant (under 1 year)"
    - For BOH: Estimated Value shows "N/A - Age outside standard range"
 
+### Test Scenario 7: Phone Type Selection (Mobile)
+1. Fill caregiver phone: `336-123-4567`
+2. Select phone type: **Mobile**
+3. **Expected:** "Can receive text messages?" section appears
+4. **Expected:** Alternative phone number field appears
+5. Select "Yes" or "No" for texting
+6. Optionally add alternative phone
+
+### Test Scenario 8: Phone Type Selection (Non-Mobile)
+1. Fill caregiver phone: `336-987-6543`
+2. Select phone type: **Home** or **Work**
+3. **Expected:** Text message section hidden (N/A auto-selected)
+4. **Expected:** Alternative phone field appears
+
+### Test Scenario 9: Direct Line with Extension
+1. Fill social worker phone: `336-555-1234`
+2. Select phone type: **Direct Line**
+3. **Expected:** Extension field appears
+4. Enter extension: `1234`
+5. **Expected:** Extension saved with form data
+
+### Test Scenario 10: Alternative Phone Numbers
+1. After selecting any primary phone type
+2. Alternative phone field appears
+3. Enter alt phone: `336-555-9999`
+4. Select alternative phone type
+5. **Expected:** Alt phone auto-formats to `336-555-9999`
+
 ---
 
 ## 📊 Data Structure
@@ -152,7 +205,10 @@
 
   "caregiverName": "Jane Smith",
   "caregiverPhone": "336-123-4567",
+  "caregiverPhoneType": "mobile",
   "caregiverText": "yes",
+  "caregiverAltPhone": "336-555-1234",
+  "caregiverAltPhoneType": "home",
   "caregiverEmail": "jane@example.com",
   "caregiverCounty": "Gaston, NC",
   "licensed": "yes",
@@ -160,7 +216,11 @@
 
   "socialWorkerName": "Mary Johnson",
   "socialWorkerPhone": "336-987-6543",
-  "socialWorkerText": "yes",
+  "socialWorkerPhoneType": "direct",
+  "socialWorkerExtension": "1234",
+  "socialWorkerText": "n/a",
+  "socialWorkerAltPhone": "336-555-9999",
+  "socialWorkerAltPhoneType": "mobile",
   "socialWorkerEmail": "mary@dss.gov",
   "socialWorkerCounty": "Gaston, NC",
 
